@@ -1,8 +1,8 @@
 // Config options: https://github.com/rocker-org/devcontainer-templates/tree/main/src/r-ver
 {
-  "name": "R (rocker/r-ver base)",
+  "name": "Data Science Devcontainer with R (rocker/r-ver base) and Python",
   "image": "ghcr.io/rocker-org/devcontainer/r-ver:4.3",
-  // Add software
+  // Add DS software
   "features": {
     // Quarto configuration: https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto-cli/README.md
 	  "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
@@ -10,18 +10,63 @@
       "version": "latest" 
 	  },
     // RStudio Server configuration: https://github.com/rocker-org/devcontainer-features/blob/main/src/rstudio-server/README.md
-    "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {}
+    "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {},
+    // rig configuration: https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig/README.md
+		"ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
+      // Avoid reinstalling R
+			"version": "none", 
+      // Setup VS Code for R
+			"vscodeRSupport": "full", 
+      // Install JupyterLab
+			"installJupyterlab": true,
+      // Install devtools package
+      "installDevTools": true,
+      // Install VscDebugger package
+      "installVscDebugger": true,
+      // Install rmarkdown
+      "installRMarkdown": true,
+      // Install an updated container
+      "installRadian": true
+		}
   },
-  // Ensure the default RStudio Server port is automatically forwarded
+  "customizations": {
+    "codespaces": {
+      "openFiles": []
+    },
+    "vscode": {
+      // Customize R settings
+      "settings": {
+        "r.rterm.linux": "/usr/local/bin/radian",
+        "r.bracketedPaste": true,
+        "r.plot.useHttpgd": true,
+        "[r]": {
+          "editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+        }
+      },
+      // Ensure VS Code extensions for R and Python are present
+      "extensions": [
+        "reditorsupport.r", "rdebugger.r-debugger", 
+        "quarto",
+        "ms-toolsai.jupyter", "ms-python.python"
+      ]
+    }
+  },
+  // Ensure the default RStudio Server and Jupyter ports are automatically forwarded
   "forwardPorts": [
-       8787
+       8787, 8888
   ],  
   "portsAttributes": {
   	"8787": {
   		"label": "RStudio",
   		"requireLocalPort": true,
+      // We avoid "announcing" via a pop up the port is active
   		"onAutoForward": "ignore"
-  	}
+  	},
+		"8888": {
+			"label": "Jupyter",
+			"requireLocalPort": true,
+			"onAutoForward": "ignore"
+		}
   },
   "postAttachCommand": {
       "rstudio-start": "rserver"
