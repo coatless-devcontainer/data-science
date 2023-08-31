@@ -5,20 +5,20 @@
   // Add DS software
   "features": {
     // Quarto configuration: https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto-cli/README.md
-	  "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
-		  "installTinyTex": true,
-      "version": "latest" 
-	  },
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+      "installTinyTex": true,
+      "version": "latest"
+    },
     // RStudio Server configuration: https://github.com/rocker-org/devcontainer-features/blob/main/src/rstudio-server/README.md
     "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {},
     // rig configuration: https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig/README.md
-		"ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
+    "ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
       // Avoid reinstalling R
-			"version": "none", 
+      "version": "none",
       // Setup VS Code for R
-			"vscodeRSupport": "full", 
+      "vscodeRSupport": "full",
       // Install JupyterLab
-			"installJupyterlab": true,
+      "installJupyterlab": true,
       // Install devtools package
       "installDevTools": true,
       // Install VscDebugger package
@@ -27,7 +27,7 @@
       "installRMarkdown": true,
       // Install an improved R console
       "installRadian": true
-		}
+    }
   },
   "customizations": {
     "codespaces": {
@@ -45,30 +45,33 @@
       },
       // Ensure VS Code extensions for R and Python are present
       "extensions": [
-        "reditorsupport.r", "rdebugger.r-debugger", 
+        "reditorsupport.r",
+        "rdebugger.r-debugger",
         "quarto",
-        "ms-toolsai.jupyter", "ms-python.python"
+        "ms-toolsai.jupyter",
+        "ms-python.python"
       ]
     }
   },
   // Ensure the default RStudio Server and Jupyter ports are automatically forwarded
   "forwardPorts": [
-       8787, 8888
-  ],  
+    8787,
+    8888
+  ],
   "portsAttributes": {
-  	"8787": {
-  		"label": "RStudio",
-  		"requireLocalPort": true,
+    "8787": {
+      "label": "RStudio",
+      "requireLocalPort": true,
       // We avoid "announcing" via a pop up the port is active
-  		"onAutoForward": "ignore"
-  	},
-		"8888": {
-			"label": "Jupyter",
-			"requireLocalPort": true,
-			"onAutoForward": "ignore"
-		}
+      "onAutoForward": "ignore"
+    },
+    "8888": {
+      "label": "Jupyter",
+      "requireLocalPort": true,
+      "onAutoForward": "ignore"
+    }
   },
   "postAttachCommand": {
-      "rstudio-start": "rserver"
+    "rstudio-start": "rserver"
   }
 }
