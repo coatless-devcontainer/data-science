@@ -25,7 +25,7 @@
       "installVscDebugger": true,
       // Install rmarkdown
       "installRMarkdown": true,
-      // Install an updated container
+      // Install an improved R console
       "installRadian": true
 		}
   },
