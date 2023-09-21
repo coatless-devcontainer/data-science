@@ -70,8 +70,5 @@
       "requireLocalPort": true,
       "onAutoForward": "ignore"
     }
-  },
-  "postAttachCommand": {
-    "rstudio-start": "rserver"
   }
 }
